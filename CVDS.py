@@ -4,7 +4,7 @@ from telegram import Bot
 from telegram.error import TelegramError
 
 # Токен вашего бота
-TOKEN = "ВАШИБУКВОЦИФРЫ"
+TOKEN = "ЦИФРОБУКВЫБОТА"
 # ID чата, куда бот будет отправлять сообщения
 CHAT_ID = "88027389"
 # ID канала, куда бот будет отправлять сообщения
@@ -52,7 +52,7 @@ async def main():
 
     try:
         # Сообщение о запуске бота
-        startup_message = "Бот был перезагружен и обновлен до новой beta версии."
+        startup_message = "Бот обновлен до новой версии. Интервал проверки сокращен с 5 до 2 минут"
         await send_message(CHAT_ID, startup_message)
         await send_message(CHANNEL_ID, startup_message, THREAD_ID)
         print("Отправлено сообщение о перезапуске бота.")
@@ -72,9 +72,9 @@ async def main():
                 previous_cities = current_cities
                 if current_cities:
                     city_list = "\n".join(current_cities)
-                    message = f"Обновлены данные о наличии городов.\nВ наличии:\n{city_list}"
+                    message = f"Сервера в наличии:\n{city_list}"
                 else:
-                    message = "Все города закончились. Сейчас нет доступных городов."
+                    message = "Свободные места на всех серверах закончились."
 
                 await send_message(CHAT_ID, message)
                 await send_message(CHANNEL_ID, message, THREAD_ID)
@@ -83,7 +83,7 @@ async def main():
                 print("Данные не изменились. Сообщение не отправлено.")
 
             # Задержка перед следующей проверкой (5 минут)
-            await asyncio.sleep(300)
+            await asyncio.sleep(120)
 
         except KeyboardInterrupt:
             print("Работа бота была прервана.")
@@ -91,7 +91,6 @@ async def main():
         except Exception as e:
             print(f"Произошла ошибка: {e}")
             await asyncio.sleep(5)  # Задержка перед повторной попыткой
-
 if __name__ == "__main__":
     # Запуск асинхронного цикла
     asyncio.run(main())
