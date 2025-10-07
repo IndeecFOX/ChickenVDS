@@ -20,7 +20,8 @@ CITY_FLAGS = {
     "Amsterdam": "🇳🇱"    ,
     "Silicon-valley": "🇺🇸"    ,
     "Dallas": "🇺🇸"    ,
-    "Del": "🇮🇳"
+    "Del": "🇮🇳"    ,
+    "Riga": "🇱🇻"
 }
 
 # Инициализация бота и диспетчера
@@ -68,7 +69,8 @@ async def fetch_regions():
                             )
                             if matching_plan:
                                 status = "✅" if not matching_plan.get("is_out_of_stock") else "❌"
-                                price_line = f"${price}/мес {status}"
+                                currency_symbol = "€" if city_name == "Kansas" else "$"
+                                price_line = f"{currency_symbol}{price}/мес {status}"
                                 if kind == "standard":
                                     standard_plans.append(price_line)
                                     has_available_plans = has_available_plans or status == "✅"
